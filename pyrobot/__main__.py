@@ -29,7 +29,8 @@ if __name__ == "__main__":
         HU_STRING_SESSION,
         api_id=APP_ID,
         api_hash=API_HASH,
-        plugins=plugins
+        plugins=plugins, 
+        workers=20
     )
-    #
+    pyrogram.Client.DOWNLOAD_WORKERS = 10
     app.run()
