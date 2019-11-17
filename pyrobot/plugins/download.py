@@ -20,11 +20,7 @@ async def down_load_media(client, message):
         os.makedirs(TMP_DOWNLOAD_DIRECTORY)
     if message.reply_to_message is not None:
         start_t = datetime.now()
-        a = await client.send_message(
-            chat_id=message.chat.id,
-            text="Processing...",
-            reply_to_message_id=message.message_id
-        )
+        a = await message.edit("Processing...") 
         download_location = TMP_DOWNLOAD_DIRECTORY + "/"
         c_time = time.time()
         the_real_download_location = await client.download_media(
