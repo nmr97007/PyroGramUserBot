@@ -33,4 +33,5 @@ if __name__ == "__main__":
         workers=20
     )
     pyrogram.Client.DOWNLOAD_WORKERS = 10
+    pyrogram.Client.UPDATES_WORKERS = 10
     app.run()
