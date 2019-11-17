@@ -19,6 +19,7 @@ async def upload_as_document(client, message):
         recvd_command, local_file_name = message.text.split(" ")
         if os.path.exists(local_file_name):
             start_t = datetime.now()
+            a = await message.edit("Processing...")
             c_time = time.time()
             doc_caption = os.path.basename(local_file_name)
             the_real_download_location = await client.send_document(
@@ -31,7 +32,7 @@ async def upload_as_document(client, message):
                 reply_to_message_id=message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload", message, c_time
+                    "trying to upload", a, c_time
                 )
             )
             end_t = datetime.now()
@@ -50,6 +51,7 @@ async def upload_as_video(client, message):
         recvd_command, local_file_name = message.text.split(" ")
         if os.path.exists(local_file_name):
             start_t = datetime.now()
+            a = await message.edit("Processing...")
             c_time = time.time()
             doc_caption = os.path.basename(local_file_name)
             the_real_download_location = await client.send_video(
@@ -66,7 +68,7 @@ async def upload_as_video(client, message):
                 reply_to_message_id=message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload", message, c_time
+                    "trying to upload", a, c_time
                 )
             )
             end_t = datetime.now()
@@ -85,6 +87,7 @@ async def upload_as_photo(client, message):
         recvd_command, local_file_name = message.text.split(" ")
         if os.path.exists(local_file_name):
             start_t = datetime.now()
+            a = await message.edit("Processing...")
             c_time = time.time()
             doc_caption = os.path.basename(local_file_name)
             the_real_download_location = await client.send_photo(
@@ -97,7 +100,7 @@ async def upload_as_photo(client, message):
                 reply_to_message_id=message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload", message, c_time
+                    "trying to upload", a, c_time
                 )
             )
             end_t = datetime.now()
