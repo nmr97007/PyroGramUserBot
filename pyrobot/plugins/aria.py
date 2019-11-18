@@ -99,14 +99,7 @@ async def aria_start():
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
-    process = await asyncio.create_subprocess_exec(
-        *aria2_daemon_start_cmd,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    LOGGER.info(stdout)
-    LOGGER.info(stderr)
+    aria2_is_running = os.system(aria2_daemon_start_cmd)
     aria2 = aria2p.API(
         aria2p.Client(
             host="http://localhost",
