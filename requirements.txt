@@ -1,3 +1,6 @@
+aiohttp
+aria2p
+asyncio
 https://github.com/pyrogram/pyrogram/archive/asyncio.zip
 beautifulsoup4
 gitpython
@@ -13,6 +16,3 @@ pySmartDL
 sqlalchemy
 tgcrypto
 youtube-dl
-aiohttp
-aria2p
-asyncio
