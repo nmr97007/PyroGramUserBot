@@ -77,29 +77,11 @@ def extract_link(message):
 #ariastart
 
 async def aria_start():
-    aria2_daemon_start_cmd = []
-    # start the daemon, aria2c command
-    aria2_daemon_start_cmd.append("aria2c")
-    # aria2_daemon_start_cmd.append("--allow-overwrite=true")
-    aria2_daemon_start_cmd.append("--daemon=true")
-    # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
-    # TODO: this does not work, need to investigate this.
-    # but for now, https://t.me/TrollVoiceBot?start=858
-    aria2_daemon_start_cmd.append("--enable-rpc")
-    aria2_daemon_start_cmd.append("--follow-torrent=mem")
-    aria2_daemon_start_cmd.append("--max-connection-per-server=10")
-    aria2_daemon_start_cmd.append("--min-split-size=10M")
-    aria2_daemon_start_cmd.append("--rpc-listen-all=false")
-    aria2_daemon_start_cmd.append(f"--rpc-listen-port=6800")
-    aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append("--seed-ratio=0.0")
-    aria2_daemon_start_cmd.append("--seed-time=1")
-    aria2_daemon_start_cmd.append("--split=10")
-    aria2_daemon_start_cmd.append(f"--bt-stop-timeout=600")
+    
+    cmd = "aria2c --enable-rpc --rpc-listen-all=false --rpc-listen-port 6800  --max-connection-per-server=10 --rpc-max-request-size=1024M --seed-time=0.01 --min-split-size=10M --follow-torrent=mem --split=10 --daemon=true --allow-overwrite=true"
+    LOGGER.info(cmd)
     #
-    LOGGER.info(aria2_daemon_start_cmd)
-    #
-    aria2_is_running = os.system(aria2_daemon_start_cmd)
+    aria2_is_running = os.system(cmd)
     aria2 = aria2p.API(
         aria2p.Client(
             host="http://localhost",
