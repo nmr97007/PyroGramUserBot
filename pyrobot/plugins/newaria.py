@@ -5,6 +5,10 @@ cmds: Magnet link : .magnet magnetLink
 	  Remove All Downloads: .ariaRM
 By:- @Zero_cool7870"""
 
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 import aria2p
 import asyncio
 import io
