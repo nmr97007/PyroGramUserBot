@@ -7,6 +7,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 import os
 import aria2p
+import asyncio 
 from pyrogram import Client, Filters
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 
@@ -92,13 +93,8 @@ async def aria_start():
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
-    process = await asyncio.create_subprocess_exec(
-        *aria2_daemon_start_cmd,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    LOGGER.info(stdout)
+    process = subprocess.check_output(aria2_daemon_start_cmd, stderr=subprocess.STDOUT, timeout="100") 
+    #LOGGER.info(stdout)
     LOGGER.info(stderr)
     aria2 = aria2p.API(
         aria2p.Client(
