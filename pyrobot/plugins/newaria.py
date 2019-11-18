@@ -125,13 +125,13 @@ async def show_all(client, event):
 		await asyncio.sleep(2)	
 		await event.delete()	
 		#await client.send_document(
-			event.chat_id,
-			output,
-			force_document=True,
-			supports_streaming=False,
-			allow_cache=False
-			reply_to=event.message.id,
-			)				
+			#event.chat_id,
+			#output,
+			#force_document=True,
+			#supports_streaming=False,
+			#allow_cache=False
+			#reply_to=event.message.id,
+			#)				
 
 
 
