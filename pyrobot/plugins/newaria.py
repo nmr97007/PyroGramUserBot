@@ -25,8 +25,6 @@ aria2 = aria2p.API(
 
 @Client.on_message(Filters.command("magnet", COMMAND_HAND_LER)  & Filters.me)
 async def magnet_download(client, event):
-	if event.fwd_from:
-		return
 	var = event.text
 	var = var[8:]	
 	magnet_uri = var
@@ -47,8 +45,6 @@ async def magnet_download(client, event):
 	
 @Client.on_message(Filters.command("ator", COMMAND_HAND_LER)  & Filters.me)
 async def torrent_download(client, event):
-	if event.fwd_from:
-		return
 	var = event.text[5:]
 	torrent_file_path = var	
 	torrent_file_path = torrent_file_path.replace("`","")
@@ -66,10 +62,6 @@ async def torrent_download(client, event):
 
 @Client.on_message(Filters.command("ariaRM", COMMAND_HAND_LER)  & Filters.me)
 async def remove_all(client, event):
-
-	if event.fwd_from:
-		return
-
 	try:
 		removed = aria2.remove_all(force=True)
 		aria2.purge_all()
@@ -83,9 +75,6 @@ async def remove_all(client, event):
 
 @Client.on_message(Filters.command("show", COMMAND_HAND_LER)  & Filters.me)
 async def show_all(client, event):
-
-	if event.fwd_from:
-		return
 	output = "output.txt"
 	downloads = aria2.get_downloads() 
 	msg = ""
