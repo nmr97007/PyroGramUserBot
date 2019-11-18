@@ -20,7 +20,7 @@ from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 @Client.on_message(Filters.command("leech", COMMAND_HAND_LER)  & Filters.me)
 async def incoming_message_f(client, message):
     """leech"""
-    i_m_sefg = await message.edit_text("processing", quote=True)
+    i_m_sefg = await message.edit_text("processing")
     # get link from the incoming message
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
