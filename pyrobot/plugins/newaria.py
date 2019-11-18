@@ -23,7 +23,7 @@ aria2 = aria2p.API(
 		)
 	)
 
-@Client.on_message(Filters.command("addmagnet", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("addmag", COMMAND_HAND_LER)  & Filters.me)
 async def magnet_download(client, event):
 	var = event.text
 	var = var[8:]	
@@ -68,18 +68,14 @@ async def remove_all(client, event):
 		os.system("aria2p remove-all")
 	await event.edit("`Removed All Downloads.`")  
 
-@Client.on_message(Filters.command("ariaPause", COMMAND_HAND_LER)  & Filters.me)
-async def pause_all(event):
-    if event.fwd_from:
-        return
+@Client.on_message(Filters.command("ariaP", COMMAND_HAND_LER)  & Filters.me)
+async def pause_all(client, event):
     # Pause ALL Currently Running Downloads.
     paused = aria2.pause_all(force=True)
     await event.edit("Output: " + str(paused))
 
-@Client.on_message(Filters.command("ariaResume", COMMAND_HAND_LER)  & Filters.me)
-async def resume_all(event):
-    if event.fwd_from:
-        return
+@Client.on_message(Filters.command("ariaR", COMMAND_HAND_LER)  & Filters.me)
+async def resume_all(client, event):
     resumed = aria2.resume_all()
     await event.edit("Output: " + str(resumed))
 
