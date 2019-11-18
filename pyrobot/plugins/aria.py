@@ -43,8 +43,7 @@ async def incoming_message_f(client, message):
             aria_i_p,
             dl_url,
             new_download_location,
-            i_m_sefg, 
-            is_zip 
+            i_m_sefg
         )
         if not sagtus:
             # if FAILED, display the error message
@@ -117,7 +116,7 @@ async def call_apropriate_function(
     aria_instance,
     incoming_link,
     c_file_name,
-    previous_message
+    sent_message_to_update_tg_p
 ):
     if incoming_link.startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
