@@ -15,3 +15,4 @@ tgcrypto
 youtube-dl
 aiohttp
 aria2p
+asyncio
