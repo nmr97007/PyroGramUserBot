@@ -7,7 +7,7 @@ from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 @Client.on_message(Filters.command("leech", COMMAND_HAND_LER)  & Filters.me)
 async def incoming_message_f(client, message):
     """leech"""
-    i_m_sefg = await message.edit_text("processing", quote=True)
+    i_m_sefg = await message.edit_text("processing")
     # get link from the incoming message
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
@@ -80,7 +80,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
     aria2_daemon_start_cmd.append("--seed-ratio=0.0")
     aria2_daemon_start_cmd.append("--seed-time=1")
-    aria2_daemon_start_cmd.append("--split=10")
+    #aria2_daemon_start_cmd.append("--split=10")
     aria2_daemon_start_cmd.append(f"--bt-stop-timeout=600")
     #
     LOGGER.info(aria2_daemon_start_cmd)
