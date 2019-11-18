@@ -1,9 +1,5 @@
-"""A Torrent Client Plugin Based On Aria2 for Userbot
-cmds: Magnet link : .magnet magnetLink
-	  Torrent file from local: .ator file_path
-	  Show Downloads: .show
-	  Remove All Downloads: .ariaRM
-By:- @Zero_cool7870"""
+"""https://github.com/SpEcHiDe/UniBorg/blob/master/stdplugins/aria_two.py @Zero_cool7870"""
+#@user_nmr 
 
 import logging
 logging.basicConfig(level=logging.DEBUG,
@@ -27,7 +23,7 @@ aria2 = aria2p.API(
 		)
 	)
 
-@Client.on_message(Filters.command("magnet", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("addmagnet", COMMAND_HAND_LER)  & Filters.me)
 async def magnet_download(client, event):
 	var = event.text
 	var = var[8:]	
@@ -45,9 +41,8 @@ async def magnet_download(client, event):
 	await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
 	new_gid = await check_metadata(gid)
 	await progress_status(gid=new_gid,event=event,previous=None)
-
 	
-@Client.on_message(Filters.command("ator", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("addtor", COMMAND_HAND_LER)  & Filters.me)
 async def torrent_download(client, event):
 	var = event.text[5:]
 	torrent_file_path = var	
@@ -62,8 +57,6 @@ async def torrent_download(client, event):
 	gid = download.gid
 	await progress_status(gid=gid,event=event,previous=None)
 
-
-
 @Client.on_message(Filters.command("ariaRM", COMMAND_HAND_LER)  & Filters.me)
 async def remove_all(client, event):
 	try:
@@ -75,9 +68,22 @@ async def remove_all(client, event):
 		os.system("aria2p remove-all")
 	await event.edit("`Removed All Downloads.`")  
 
+@Client.on_message(Filters.command("ariaPause", COMMAND_HAND_LER)  & Filters.me)
+async def pause_all(event):
+    if event.fwd_from:
+        return
+    # Pause ALL Currently Running Downloads.
+    paused = aria2.pause_all(force=True)
+    await event.edit("Output: " + str(paused))
 
+@Client.on_message(Filters.command("ariaResume", COMMAND_HAND_LER)  & Filters.me)
+async def resume_all(event):
+    if event.fwd_from:
+        return
+    resumed = aria2.resume_all()
+    await event.edit("Output: " + str(resumed))
 
-@Client.on_message(Filters.command("show", COMMAND_HAND_LER)  & Filters.me)
+@Client.on_message(Filters.command("ariastatus", COMMAND_HAND_LER)  & Filters.me)
 async def show_all(client, event):
 	output = "output.txt"
 	downloads = aria2.get_downloads() 
@@ -87,29 +93,23 @@ async def show_all(client, event):
 	if len(msg) <= 4096:
 		await event.edit("`Current Downloads: `\n"+msg)
 	else:
-		await event.edit("`Output is huge...`")
+		await event.edit("`Output is huge.Sending as file.. `")
 		with open(output,'w') as f:
 			f.write(msg)
 		await asyncio.sleep(2)	
 		await event.delete()	
-		#await client.send_document(
-			#event.chat_id,
-			#output,
-			#force_document=True,
-			#supports_streaming=False,
-			#allow_cache=False
-			#reply_to=event.message.id,
-			#)				
-
-
+		await client.send_document(
+			chat_id=event.chat_id,
+			document=output,
+			caption="`Output is huge. Sending as a file...`", 
+			reply_to=event.message.id,
+			)				
 
 async def check_metadata(gid):
 	file = aria2.get_download(gid)
 	new_gid = file.followed_by_ids[0]
 	logger.info("Changing GID "+gid+" to "+new_gid)
 	return new_gid	
-
-
 
 async def progress_status(gid,event,previous):
 	try:
