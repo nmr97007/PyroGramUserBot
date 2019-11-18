@@ -12,6 +12,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 import os
+import asyncio
 import aria2p
 from pyrogram import Client, Filters
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
