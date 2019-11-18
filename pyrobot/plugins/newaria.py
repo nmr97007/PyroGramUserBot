@@ -1,41 +1,19 @@
 """A Torrent Client Plugin Based On Aria2 for Userbot
-
-
-
-cmds: Magnet link : .addmagnet magnetLink
-
-	  Torrent file from local: .addtorrent file_path
-
+cmds: Magnet link : .magnet magnetLink
+	  Torrent file from local: .ator file_path
 	  Show Downloads: .show
-
 	  Remove All Downloads: .ariaRM
-
-	  Resume All Downloads: .ariaResume
-
-	  Pause All Downloads:  .ariaP
-
-
-
 By:- @Zero_cool7870"""
 
-
-
 import aria2p
-import asynci
+import asyncio
 import io
 import os
 from pyrobot import COMMAND_HAND_LER
 
-
-
-
-
 cmd = "aria2c --enable-rpc --rpc-listen-all=false --rpc-listen-port 6800  --max-connection-per-server=10 --rpc-max-request-size=1024M --seed-time=0.01 --min-split-size=10M --follow-torrent=mem --split=10 --daemon=true --allow-overwrite=true"
-
 EDIT_SLEEP_TIME_OUT = 6
-
 aria2_is_running = os.system(cmd)
-
 aria2 = aria2p.API(
 		aria2p.Client(
 			host="http://localhost",
@@ -43,10 +21,6 @@ aria2 = aria2p.API(
 			secret=""
 		)
 	)
-
-
-
-
 
 @Client.on_message(Filters.command("magnet", COMMAND_HAND_LER)  & Filters.me)
 async def magnet_download(client, event):
@@ -110,7 +84,7 @@ async def remove_all(client, event):
 async def show_all(client, event):
 
 	if event.fwd_from:
-		retur
+		return
 	output = "output.txt"
 	downloads = aria2.get_downloads() 
 	msg = ""
