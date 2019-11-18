@@ -8,6 +8,7 @@ LOGGER = logging.getLogger(__name__)
 import os
 import aria2p
 import asyncio 
+import subprocess
 from pyrogram import Client, Filters
 from pyrobot import COMMAND_HAND_LER, TMP_DOWNLOAD_DIRECTORY
 
